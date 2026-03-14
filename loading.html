@@ -265,8 +265,7 @@
 
 <div id="layout">
 	<div id="main">
-		<img id="mapimg" src="asset://mapimage/invalid_map" alt=""
-		     onerror="useFallback();" />
+		<img id="mapimg" alt="" />
 	</div>
 
 	<div id="side">
@@ -450,9 +449,10 @@
 	}
 
 	window.onload = function() {
-		var tipEl = document.getElementById('server-tip');
-		if (tipEl) tipEl.textContent = 'Gathering useful information for your match...';
-		rotatetips();
+	    useFallback();
+	    var tipEl = document.getElementById('server-tip');
+	    if (tipEl) tipEl.textContent = 'Gathering useful information for your match...';
+	    rotatetips();
 	};
 </script>
 
