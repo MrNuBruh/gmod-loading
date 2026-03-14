@@ -342,64 +342,27 @@
 	}
 
 	function GameDetails(servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, lang, gamemodeNice) {
-		maxPlayers = maxplayers;
-
-		var elServer = document.getElementById('bottom-server');
-		var elMap    = document.getElementById('serverMap');
-		var elGm     = document.getElementById('serverGamemode');
-
-		if (elServer) elServer.textContent = servername || 'Server';
-		if (elMap)    elMap.textContent    = mapname    || '—';
-		if (elGm)     elGm.textContent     = gamemodeNice || gamemode || 'Unknown';
-
-		var mapImg = 'asset://mapimage/' + mapname;
-		var img = document.getElementById('mapimg');
-
-		img.onload = function() {
-			if (this.naturalWidth === 0 || this.naturalHeight === 0) {
-				useFallback();
-				return;
-			}
-
-			try {
-				var grayCount = 0;
-				var canvas = document.createElement('canvas');
-				canvas.width = 3; canvas.height = 3;
-				var ctx = canvas.getContext('2d');
-				ctx.drawImage(this, 0, 0, 3, 3);
-
-				for (var sy = 0; sy < 3; sy++) {
-					for (var sx = 0; sx < 3; sx++) {
-						var px = ctx.getImageData(sx, sy, 1, 1).data;
-						var r = px[0], g = px[1], b = px[2];
-						var isGray = Math.abs(r-g) < 10 && Math.abs(g-b) < 10;
-						var isDark = r < 85;
-						if (isGray && isDark) grayCount++;
-					}
-				}
-
-				if (grayCount === 9) {
-					useFallback();
-					return;
-				}
-			} catch(e) {}
-
-			document.getElementById('bg').style.backgroundImage = "url('" + mapImg + "')";
-			this.className = 'loaded';
-		};
-
-		img.onerror = function() { useFallback(); };
-		img.src = mapImg;
-
-		var gmTips = tipsPorGamemode[gamemode] || [];
-		listOfTips = gmTips.concat(tipsChat);
-		listOfTips.sort(function() { return Math.random() - 0.5; });
-
-		actualTip = 0;
-		var tipEl = document.getElementById('server-tip');
-		if (tipEl) tipEl.innerHTML = listOfTips[0];
-
-		updatePlayerCount(0);
+	    maxPlayers = maxplayers;
+	
+	    var elServer = document.getElementById('bottom-server');
+	    var elMap    = document.getElementById('serverMap');
+	    var elGm     = document.getElementById('serverGamemode');
+	
+	    if (elServer) elServer.textContent = servername || 'Server';
+	    if (elMap)    elMap.textContent    = mapname    || '—';
+	    if (elGm)     elGm.textContent     = gamemodeNice || gamemode || 'Unknown';
+	
+	    useFallback();
+	
+	    var gmTips = tipsPorGamemode[gamemode] || [];
+	    listOfTips = gmTips.concat(tipsChat);
+	    listOfTips.sort(function() { return Math.random() - 0.5; });
+	
+	    actualTip = 0;
+	    var tipEl = document.getElementById('server-tip');
+	    if (tipEl) tipEl.innerHTML = listOfTips[0];
+	
+	    updatePlayerCount(0);
 	}
 
 	function SetFilesTotal(total) {
