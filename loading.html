@@ -124,7 +124,6 @@
 			-webkit-backdrop-filter: blur(1.146vw) saturate(1.4);
 			border-left: 0.052vw solid var(--panel-border);
 			opacity: 1;
-			transform: translateX(0.521vw);
 			transition: opacity 0.5s ease, transform 0.5s ease;
 		}
 		#side.visible {
@@ -373,7 +372,7 @@
 	var maxPlayers = 0;
 	var actualTip = 0;
  
-	var tipsChat = ["Loading resources from the server..., “Enjoy your stay!"];
+	var tipsChat = ["Loading resources from the server...", "Enjoy your stay!"];
  
 	var tipsPorGamemode = {
 
@@ -402,9 +401,8 @@
 	function useFallback() {
 		var img = document.getElementById('mapimg');
 		img.src = 'fallback_map.jpg';
+		img.classList.add('loaded'); // ← esto faltaba
 		document.getElementById('bg').style.backgroundImage = "url('fallback_map.jpg')";
-		document.getElementById('bg-blur').style.backgroundImage = "url('fallback_map.jpg')";
-		setTimeout(function() { document.getElementById('bg-blur').classList.add('ready'); }, 80);
 	}
 	
 	function GameDetails(servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, lang, gamemodeNice) {
