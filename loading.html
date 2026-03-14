@@ -30,15 +30,12 @@
 			background: #0d0d10 center/cover no-repeat;
 		}
 		
-		#bg-blur {
-			display: none;
-		}
+		#bg-blur { display: none; }
 		#bg-blur.ready { opacity: 1; }
 
 		#bg-dim {
 			position: fixed; 
-			top: 0; 
-			left: 0; 
+			top: 0; left: 0; 
 			right: var(--side-w); 
 			bottom: var(--bottom-h);
 			background: rgba(0,0,0,0.48);
@@ -61,33 +58,8 @@
 			opacity: 0;
 			transition: opacity 0.7s ease;
 			object-position: center;
-			width: 100%;
-			height: 100%;
 		}
 		#mapimg.loaded { opacity: 1; }
-
-		#map-fallback {
-			position: absolute;
-			top: 0; left: 0; width: 100%; height: 100%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			pointer-events: none;
-			visibility: hidden;
-			opacity: 0;
-			transition: opacity 0.45s ease, visibility 0s linear 0.45s;
-		}
-		#map-fallback.visible {
-			visibility: visible;
-			opacity: 1;
-			transition-delay: 0s;
-		}
-		#map-fallback svg {
-			width: 40vmin;
-			max-width: 420px;
-			height: auto;
-			filter: drop-shadow(0 8px 30px rgba(0,0,0,0.6));
-		}
 
 		#mapimg.fallback {
 			object-fit: contain;
@@ -101,17 +73,6 @@
 			pointer-events: none;
 		}
 
-		#logo-wrap {
-			position: absolute;
-			top: 1.25vw; left: 1.458vw;
-			z-index: 10;
-		}
-		#logo {
-			height: 1.979vw;
-			opacity: 0.88;
-			filter: drop-shadow(0 0.052vw 0.313vw rgba(0,0,0,0.8));
-		}
-
 		#side {
 			position: absolute;
 			top: 0; right: 0;
@@ -120,20 +81,14 @@
 			display: flex;
 			flex-direction: column;
 			background: var(--panel-bg);
-			backdrop-filter: blur(1.146vw) saturate(1.4);
-			-webkit-backdrop-filter: blur(1.146vw) saturate(1.4);
-			border-left: 0.052vw solid var(--panel-border);
-			opacity: 1;
-			transition: opacity 0.5s ease, transform 0.5s ease;
-		}
-		#side.visible {
-			opacity: 1;
-			transform: translateX(0);
+			backdrop-filter: blur(22px) saturate(1.4);
+			-webkit-backdrop-filter: blur(22px) saturate(1.4);
+			border-left: 1px solid var(--panel-border);
 		}
 
 		#side-header {
-			padding: 0.729vw 0.938vw 0.625vw;
-			border-bottom: 0.052vw solid var(--panel-border);
+			padding: 14px 18px 12px;
+			border-bottom: 1px solid var(--panel-border);
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
@@ -141,7 +96,7 @@
 		}
 
 		#side-title {
-			font-size: 0.573vw;
+			font-size: 11px;
 			font-weight: 600;
 			letter-spacing: 0.1em;
 			text-transform: uppercase;
@@ -149,7 +104,7 @@
 		}
 
 		#player-count {
-			font-size: 0.573vw;
+			font-size: 11px;
 			color: var(--accent);
 			font-variant-numeric: tabular-nums;
 		}
@@ -157,15 +112,15 @@
 		#player-list {
 			flex: 1;
 			overflow-y: auto;
-			padding: 0.417vw 0;
+			padding: 8px 0;
 		}
 
 		.player-row {
 			display: flex;
 			align-items: center;
-			padding: 0.365vw 0.938vw;
+			padding: 7px 18px;
 			opacity: 0;
-			transform: translateX(0.313vw);
+			transform: translateX(6px);
 			animation: rowIn 0.3s ease forwards;
 		}
 
@@ -174,13 +129,13 @@
 		}
 
 		.player-avatar {
-			width: 1.458vw; height: 1.458vw;
-			border-radius: 0.208vw;
+			width: 28px; height: 28px;
+			border-radius: 4px;
 			background: rgba(255,255,255,0.07);
-			border: 0.052vw solid var(--panel-border);
+			border: 1px solid var(--panel-border);
 			flex-shrink: 0;
 			overflow: hidden;
-			margin-right: 0.521vw;
+			margin-right: 10px;
 		}
 		.player-avatar img {
 			width: 100%; height: 100%;
@@ -189,7 +144,7 @@
 		}
 
 		.player-name {
-			font-size: 0.677vw;
+			font-size: 13px;
 			color: var(--text-primary);
 			white-space: nowrap;
 			overflow: hidden;
@@ -197,123 +152,11 @@
 		}
 
 		#no-players {
-			padding: 1.25vw 0.938vw;
-			font-size: 0.625vw;
+			padding: 24px 18px;
+			font-size: 12px;
 			color: var(--text-muted);
 		}
 
-		#bottom {
-			position: absolute;
-			bottom: 0; left: 0;
-			width: 100%;
-			height: var(--bottom-h);
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			padding: 0 1.458vw;
-			background: var(--bottom-bg);
-			backdrop-filter: blur(1.042vw);
-			-webkit-backdrop-filter: blur(1.042vw);
-			border-top: 0.052vw solid var(--panel-border);
-			opacity: 1;
-			transition: opacity 0.5s ease 0.1s;
-		}
-		#bottom.visible { opacity: 1; }
-
-		#bottom-info {
-			display: flex;
-			flex-direction: column;
-			min-width: 0;
-			margin-right: 1.667vw;
-		}
-
-		#bottom-server {
-			font-size: 0.729vw;
-			font-weight: 600;
-			color: var(--text-primary);
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			margin-bottom: 0.156vw;
-		}
-
-		#bottom-meta {
-			display: flex;
-			align-items: center;
-			font-size: 0.625vw;
-			color: var(--text-muted);
-		}
-
-		#bottom-meta .sep {
-			width: 0.156vw; height: 0.156vw;
-			border-radius: 50%;
-			background: var(--text-muted);
-			opacity: 0.4;
-			flex-shrink: 0;
-			margin: 0 0.521vw;
-		}
-
-		#serverMap {
-			font-family: 'Consolas', 'Courier New', monospace;
-			letter-spacing: 0.02em;
-		}
-
-		#bottom-progress {
-			display: flex;
-			flex-direction: column;
-			min-width: 11.458vw;
-			max-width: 14.583vw;
-			flex-shrink: 0;
-		}
-
-		#progress-row {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			margin-bottom: 0.313vw;
-		}
-
-		#status-text {
-			font-size: 0.573vw;
-			color: var(--text-muted);
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			max-width: 9.375vw;
-		}
-
-		#progress-pct {
-			font-size: 0.573vw;
-			color: var(--accent);
-			font-variant-numeric: tabular-nums;
-			flex-shrink: 0;
-			opacity: 0;
-			transition: opacity 0.3s;
-		}
-		#progress-pct.visible { opacity: 1; }
-
-		#bar-track {
-			width: 100%;
-			height: 0.313vw;
-			background: rgba(255, 255, 255, 0.1);
-			border-radius: 0.521vw;
-			overflow: hidden;
-		}
-
-		#bar-fill {
-			height: 100%;
-			width: 0%;
-			background: var(--accent);
-			box-shadow: 0 0 0.417vw var(--accent);
-			transition: width 0.4s ease-out;
-		}
-
-		#progress-pct {
-			font-size: 0.573vw;
-			color: var(--accent);
-			font-weight: bold;
-		}
-		
 		#tips-container {
 			padding: 25px;
 			flex: 1;
@@ -332,9 +175,105 @@
 			transition: opacity 0.5s ease-in-out;
 		}
 
-		/* dark mode */
-		body.dark {
-			--accent: #a095f5;
+		#bottom {
+			position: absolute;
+			bottom: 0; left: 0;
+			width: 100%;
+			height: var(--bottom-h);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 28px;
+			background: var(--bottom-bg);
+			backdrop-filter: blur(20px);
+			-webkit-backdrop-filter: blur(20px);
+			border-top: 1px solid var(--panel-border);
+		}
+
+		#bottom-info {
+			display: flex;
+			flex-direction: column;
+			min-width: 0;
+			margin-right: 32px;
+		}
+
+		#bottom-server {
+			font-size: 14px;
+			font-weight: 600;
+			color: var(--text-primary);
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			margin-bottom: 3px;
+		}
+
+		#bottom-meta {
+			display: flex;
+			align-items: center;
+			font-size: 12px;
+			color: var(--text-muted);
+		}
+
+		#bottom-meta .sep {
+			width: 3px; height: 3px;
+			border-radius: 50%;
+			background: var(--text-muted);
+			opacity: 0.4;
+			flex-shrink: 0;
+			margin: 0 10px;
+		}
+
+		#serverMap {
+			font-family: 'Consolas', 'Courier New', monospace;
+			letter-spacing: 0.02em;
+		}
+
+		#bottom-progress {
+			display: flex;
+			flex-direction: column;
+			min-width: 220px;
+			max-width: 280px;
+			flex-shrink: 0;
+		}
+
+		#progress-row {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 6px;
+		}
+
+		#status-text {
+			font-size: 11px;
+			color: var(--text-muted);
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			max-width: 180px;
+		}
+
+		#progress-pct {
+			font-size: 11px;
+			color: var(--accent);
+			font-variant-numeric: tabular-nums;
+			font-weight: bold;
+			flex-shrink: 0;
+		}
+
+		#bar-track {
+			width: 100%;
+			height: 6px;
+			background: rgba(255, 255, 255, 0.1);
+			border-radius: 10px;
+			overflow: hidden;
+		}
+
+		#bar-fill {
+			height: 100%;
+			width: 0%;
+			background: var(--accent);
+			box-shadow: 0 0 8px var(--accent);
+			transition: width 0.4s ease-out;
 		}
 	</style>
 </head>
@@ -353,7 +292,7 @@
 	<div id="side">
 		<div id="side-header">
 			<span id="side-title">Tips from the Server</span>
-			<span style="color: var(--accent); font-size: 12px;">💡</span>
+			<span id="player-count" style="color: var(--accent); font-size: 12px;">0 / 0</span>
 		</div>
 		<div id="tips-container">
 			<p id="server-tip">Gathering useful information for your match...</p>
@@ -361,8 +300,24 @@
 	</div>
 
 	<div id="bottom">
+		<div id="bottom-info">
+			<div id="bottom-server">Connecting...</div>
+			<div id="bottom-meta">
+				<span id="serverGamemode">Unknown</span>
+				<span class="sep"></span>
+				<span id="serverMap">—</span>
+			</div>
+		</div>
 
-		<div></div> 
+		<div id="bottom-progress">
+			<div id="progress-row">
+				<span id="status-text">Loading...</span>
+				<span id="progress-pct">0%</span>
+			</div>
+			<div id="bar-track">
+				<div id="bar-fill"></div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -371,50 +326,56 @@
 	var downloadedFiles = 0;
 	var maxPlayers = 0;
 	var actualTip = 0;
- 
-	var tipsChat = ["Loading resources from the server...", "Enjoy your stay!"];
- 
-	var tipsPorGamemode = {
 
+	var tipsChat = [
+		"Loading resources from the server...",
+		"Enjoy your stay!"
+	];
+
+	var tipsPorGamemode = {
 	};
- 
+
 	var listOfTips = tipsChat;
-	
+
 	function rotatetips() {
 		var textElement = document.getElementById('server-tip');
-		
 		if (!textElement) return;
- 
+
 		setInterval(function() {
 			textElement.style.opacity = 0;
- 
+
 			setTimeout(function() {
 				actualTip = (actualTip + 1) % listOfTips.length;
 				textElement.innerHTML = listOfTips[actualTip];
- 
 				textElement.style.opacity = 1;
 			}, 500);
- 
+
 		}, 7000);
 	}
 
 	function useFallback() {
 		var img = document.getElementById('mapimg');
 		img.src = 'fallback_map.jpg';
-		img.classList.add('loaded'); // ← esto faltaba
+		img.classList.add('loaded');
 		document.getElementById('bg').style.backgroundImage = "url('fallback_map.jpg')";
 	}
-	
+
 	function GameDetails(servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, lang, gamemodeNice) {
 		maxPlayers = maxplayers;
-		document.getElementById('bottom-server').textContent = servername;
-		document.getElementById('serverMap').textContent = mapname;
-		document.getElementById('serverGamemode').textContent = gamemodeNice || gamemode;
- 
+
+		var elServer = document.getElementById('bottom-server');
+		var elMap    = document.getElementById('serverMap');
+		var elGm     = document.getElementById('serverGamemode');
+
+		if (elServer) elServer.textContent = servername || 'Server';
+		if (elMap)    elMap.textContent    = mapname    || '—';
+		if (elGm)     elGm.textContent     = gamemodeNice || gamemode || 'Unknown';
+
 		var mapImg = 'asset://mapimage/' + mapname;
 		var img = document.getElementById('mapimg');
+
 		img.onload = function() {
-			if ( this.naturalWidth === 0 || this.naturalHeight === 0 ) {
+			if (this.naturalWidth === 0 || this.naturalHeight === 0) {
 				useFallback();
 				return;
 			}
@@ -424,7 +385,7 @@
 				var canvas = document.createElement('canvas');
 				canvas.width = 3; canvas.height = 3;
 				var ctx = canvas.getContext('2d');
-				ctx.drawImage( this, 0, 0, 3, 3 );
+				ctx.drawImage(this, 0, 0, 3, 3);
 
 				for (var sy = 0; sy < 3; sy++) {
 					for (var sx = 0; sx < 3; sx++) {
@@ -440,70 +401,72 @@
 					useFallback();
 					return;
 				}
-			} catch (e) {  }
+			} catch(e) {}
 
 			document.getElementById('bg').style.backgroundImage = "url('" + mapImg + "')";
-			document.getElementById('bg-blur').style.backgroundImage = "url('" + mapImg + "')";
-			setTimeout(function() { document.getElementById('bg-blur').classList.add('ready'); }, 80);
 			this.classList.add('loaded');
 		};
+
 		img.onerror = function() { useFallback(); };
 		img.src = mapImg;
- 
+
 		var gmTips = tipsPorGamemode[gamemode] || [];
 		listOfTips = gmTips.concat(tipsChat);
- 
 		listOfTips.sort(function() { return Math.random() - 0.5; });
- 
+
 		actualTip = 0;
 		var tipEl = document.getElementById('server-tip');
 		if (tipEl) tipEl.innerHTML = listOfTips[0];
- 
-        document.getElementById('side').classList.add('visible');
-		document.getElementById('bottom').classList.add('visible');
+
 		updatePlayerCount(0);
 	}
- 
+
 	function SetFilesTotal(total) {
 		totalFiles = Math.max(total, 1);
 	}
- 
+
 	function SetFilesNeeded(needed) {
 		downloadedFiles = Math.max(0, totalFiles - needed);
 		updateProgress();
 	}
- 
+
 	function updateProgress() {
-        if (totalFiles <= 0) return;
+		if (totalFiles <= 0) return;
 		var pct = Math.min(100, Math.round((downloadedFiles / totalFiles) * 100));
-		
-        var currentPct = parseInt(document.getElementById('progress-pct').textContent) || 0;
-        if (pct > currentPct) {
-            document.getElementById('bar-fill').style.width = pct + '%';
-            document.getElementById('progress-pct').textContent = pct + '%';
-        }
-	}
- 
-	function DownloadingFile(file) {
-		document.getElementById('status-text').textContent = "Downloading: " + file.replace(/^.*\//, '');
-	}
- 
-	function SetStatusChanged(status) {
-		document.getElementById('status-text').textContent = status;
-        
-		if (status.toLowerCase().includes("workshop complete") || status.toLowerCase().includes("client info sent")) {
-			document.getElementById('bar-fill').style.width = '100%';
-			document.getElementById('progress-pct').textContent = '100%';
+
+		var fillEl = document.getElementById('bar-fill');
+		var pctEl  = document.getElementById('progress-pct');
+
+		var currentPct = parseInt(pctEl ? pctEl.textContent : '0') || 0;
+		if (pct > currentPct) {
+			if (fillEl) fillEl.style.width = pct + '%';
+			if (pctEl)  pctEl.textContent  = pct + '%';
 		}
 	}
- 
+
+	function DownloadingFile(file) {
+		var el = document.getElementById('status-text');
+		if (el) el.textContent = 'Downloading: ' + file.replace(/^.*\//, '');
+	}
+
+	function SetStatusChanged(status) {
+		var el = document.getElementById('status-text');
+		if (el) el.textContent = status;
+
+		if (status.toLowerCase().indexOf('workshop complete') !== -1 ||
+		    status.toLowerCase().indexOf('client info sent') !== -1) {
+			var fillEl = document.getElementById('bar-fill');
+			var pctEl  = document.getElementById('progress-pct');
+			if (fillEl) fillEl.style.width = '100%';
+			if (pctEl)  pctEl.textContent  = '100%';
+		}
+	}
+
 	function updatePlayerCount(count) {
 		var el = document.getElementById('player-count');
-		if (el) {
-			el.textContent = count + ' / ' + maxPlayers;
-		}
+		if (el) el.textContent = count + ' / ' + maxPlayers;
 	}
-	
+
 	window.onload = function() {
 		var tipEl = document.getElementById('server-tip');
 		if (tipEl) tipEl.textContent = 'Gathering useful information for your match...';
