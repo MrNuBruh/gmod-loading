@@ -5,18 +5,7 @@
 	<title>Loading..</title>
 	<style>
 		*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-		:root {
-			--accent: #e8c96a;
-			--panel-bg: rgba(10, 12, 18, 0.72);
-			--panel-border: rgba(255,255,255,0.08);
-			--bottom-bg: rgba(8, 9, 14, 0.88);
-			--text-primary: #f0ede6;
-			--text-muted: rgba(240, 237, 230, 0.45);
-			--bar-bg: rgba(255,255,255,0.10);
-			--side-w: 410px;
-			--bottom-h: 80px;
-		}
-		/* */
+
 		html, body {
 			width: 100%; height: 100%;
 			overflow: hidden;
@@ -25,19 +14,16 @@
 		}
 
 		#bg {
-			position: fixed; top: 0; left: 0; 
-			right: var(--side-w); bottom: var(--bottom-h);
+			position: fixed;
+			top: 0; left: 0;
+			right: 410px; bottom: 80px;
 			background: #0d0d10 center/cover no-repeat;
 		}
-		
-		#bg-blur { display: none; }
-		#bg-blur.ready { opacity: 1; }
 
 		#bg-dim {
-			position: fixed; 
-			top: 0; left: 0; 
-			right: var(--side-w); 
-			bottom: var(--bottom-h);
+			position: fixed;
+			top: 0; left: 0;
+			right: 410px; bottom: 80px;
 			background: rgba(0,0,0,0.48);
 		}
 
@@ -48,24 +34,27 @@
 		#main {
 			position: absolute;
 			top: 0; left: 0;
-			right: var(--side-w);
-			bottom: var(--bottom-h);
+			right: 410px; bottom: 80px;
 			overflow: hidden;
 		}
+
 		#mapimg {
-			position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+			position: absolute;
+			top: 0; left: 0;
+			width: 100%; height: 100%;
 			object-fit: cover;
+			object-position: center;
 			opacity: 0;
 			transition: opacity 0.7s ease;
-			object-position: center;
 		}
+
 		#mapimg.loaded { opacity: 1; }
 
 		#mapimg.fallback {
 			object-fit: contain;
-			background: linear-gradient(180deg, #0e0a12 0%, #0b0b0d 100%);
+			background: #0e0a12;
 		}
-		
+
 		#main::after {
 			content: '';
 			position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -76,22 +65,31 @@
 		#side {
 			position: absolute;
 			top: 0; right: 0;
-			width: var(--side-w);
-			bottom: var(--bottom-h);
+			width: 410px; bottom: 80px;
+			display: -webkit-box;
+			display: -ms-flexbox;
 			display: flex;
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: normal;
+			-ms-flex-direction: column;
 			flex-direction: column;
-			background: var(--panel-bg);
-			backdrop-filter: blur(22px) saturate(1.4);
-			-webkit-backdrop-filter: blur(22px) saturate(1.4);
-			border-left: 1px solid var(--panel-border);
+			background: rgba(10, 12, 18, 0.94);
+			border-left: 1px solid rgba(255,255,255,0.08);
 		}
 
 		#side-header {
 			padding: 14px 18px 12px;
-			border-bottom: 1px solid var(--panel-border);
+			border-bottom: 1px solid rgba(255,255,255,0.08);
+			display: -webkit-box;
+			display: -ms-flexbox;
 			display: flex;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
 			align-items: center;
+			-webkit-box-pack: justify;
+			-ms-flex-pack: justify;
 			justify-content: space-between;
+			-ms-flex-negative: 0;
 			flex-shrink: 0;
 		}
 
@@ -100,73 +98,32 @@
 			font-weight: 600;
 			letter-spacing: 0.1em;
 			text-transform: uppercase;
-			color: var(--text-muted);
+			color: rgba(240, 237, 230, 0.45);
 		}
 
 		#player-count {
 			font-size: 11px;
-			color: var(--accent);
-			font-variant-numeric: tabular-nums;
-		}
-
-		#player-list {
-			flex: 1;
-			overflow-y: auto;
-			padding: 8px 0;
-		}
-
-		.player-row {
-			display: flex;
-			align-items: center;
-			padding: 7px 18px;
-			opacity: 0;
-			transform: translateX(6px);
-			animation: rowIn 0.3s ease forwards;
-		}
-
-		@keyframes rowIn {
-			to { opacity: 1; transform: translateX(0); }
-		}
-
-		.player-avatar {
-			width: 28px; height: 28px;
-			border-radius: 4px;
-			background: rgba(255,255,255,0.07);
-			border: 1px solid var(--panel-border);
-			flex-shrink: 0;
-			overflow: hidden;
-			margin-right: 10px;
-		}
-		.player-avatar img {
-			width: 100%; height: 100%;
-			object-fit: cover;
-			display: block;
-		}
-
-		.player-name {
-			font-size: 13px;
-			color: var(--text-primary);
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
-
-		#no-players {
-			padding: 24px 18px;
-			font-size: 12px;
-			color: var(--text-muted);
+			color: #e8c96a;
 		}
 
 		#tips-container {
 			padding: 25px;
+			-webkit-box-flex: 1;
+			-ms-flex: 1;
 			flex: 1;
+			display: -webkit-box;
+			display: -ms-flexbox;
 			display: flex;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
 			align-items: center;
+			-webkit-box-pack: center;
+			-ms-flex-pack: center;
 			justify-content: center;
 		}
 
 		#server-tip {
-			color: var(--text-primary);
+			color: #f0ede6;
 			font-size: 1.1rem;
 			line-height: 1.6;
 			text-align: center;
@@ -178,20 +135,28 @@
 		#bottom {
 			position: absolute;
 			bottom: 0; left: 0;
-			width: 100%;
-			height: var(--bottom-h);
+			width: 100%; height: 80px;
+			display: -webkit-box;
+			display: -ms-flexbox;
 			display: flex;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
 			align-items: center;
+			-webkit-box-pack: justify;
+			-ms-flex-pack: justify;
 			justify-content: space-between;
 			padding: 0 28px;
-			background: var(--bottom-bg);
-			backdrop-filter: blur(20px);
-			-webkit-backdrop-filter: blur(20px);
-			border-top: 1px solid var(--panel-border);
+			background: rgba(8, 9, 14, 0.96);
+			border-top: 1px solid rgba(255,255,255,0.08);
 		}
 
 		#bottom-info {
+			display: -webkit-box;
+			display: -ms-flexbox;
 			display: flex;
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: normal;
+			-ms-flex-direction: column;
 			flex-direction: column;
 			min-width: 0;
 			margin-right: 32px;
@@ -200,7 +165,7 @@
 		#bottom-server {
 			font-size: 14px;
 			font-weight: 600;
-			color: var(--text-primary);
+			color: #f0ede6;
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -208,17 +173,22 @@
 		}
 
 		#bottom-meta {
+			display: -webkit-box;
+			display: -ms-flexbox;
 			display: flex;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
 			align-items: center;
 			font-size: 12px;
-			color: var(--text-muted);
+			color: rgba(240, 237, 230, 0.45);
 		}
 
 		#bottom-meta .sep {
 			width: 3px; height: 3px;
 			border-radius: 50%;
-			background: var(--text-muted);
+			background: rgba(240, 237, 230, 0.45);
 			opacity: 0.4;
+			-ms-flex-negative: 0;
 			flex-shrink: 0;
 			margin: 0 10px;
 		}
@@ -229,23 +199,35 @@
 		}
 
 		#bottom-progress {
+			display: -webkit-box;
+			display: -ms-flexbox;
 			display: flex;
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: normal;
+			-ms-flex-direction: column;
 			flex-direction: column;
 			min-width: 220px;
 			max-width: 280px;
+			-ms-flex-negative: 0;
 			flex-shrink: 0;
 		}
 
 		#progress-row {
+			display: -webkit-box;
+			display: -ms-flexbox;
 			display: flex;
+			-webkit-box-pack: justify;
+			-ms-flex-pack: justify;
 			justify-content: space-between;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
 			align-items: center;
 			margin-bottom: 6px;
 		}
 
 		#status-text {
 			font-size: 11px;
-			color: var(--text-muted);
+			color: rgba(240, 237, 230, 0.45);
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -254,16 +236,16 @@
 
 		#progress-pct {
 			font-size: 11px;
-			color: var(--accent);
-			font-variant-numeric: tabular-nums;
+			color: #e8c96a;
 			font-weight: bold;
+			-ms-flex-negative: 0;
 			flex-shrink: 0;
 		}
 
 		#bar-track {
 			width: 100%;
 			height: 6px;
-			background: rgba(255, 255, 255, 0.1);
+			background: rgba(255,255,255,0.10);
 			border-radius: 10px;
 			overflow: hidden;
 		}
@@ -271,8 +253,7 @@
 		#bar-fill {
 			height: 100%;
 			width: 0%;
-			background: var(--accent);
-			box-shadow: 0 0 8px var(--accent);
+			background: #e8c96a;
 			transition: width 0.4s ease-out;
 		}
 	</style>
@@ -280,7 +261,6 @@
 <body>
 
 <div id="bg"></div>
-<div id="bg-blur"></div>
 <div id="bg-dim"></div>
 
 <div id="layout">
@@ -292,7 +272,7 @@
 	<div id="side">
 		<div id="side-header">
 			<span id="side-title">Tips from the Server</span>
-			<span id="player-count" style="color: var(--accent); font-size: 12px;">0 / 0</span>
+			<span id="player-count">0 / 0</span>
 		</div>
 		<div id="tips-container">
 			<p id="server-tip">Gathering useful information for your match...</p>
@@ -333,6 +313,7 @@
 	];
 
 	var tipsPorGamemode = {
+
 	};
 
 	var listOfTips = tipsChat;
@@ -343,21 +324,22 @@
 
 		setInterval(function() {
 			textElement.style.opacity = 0;
-
 			setTimeout(function() {
 				actualTip = (actualTip + 1) % listOfTips.length;
 				textElement.innerHTML = listOfTips[actualTip];
 				textElement.style.opacity = 1;
 			}, 500);
-
 		}, 7000);
 	}
 
 	function useFallback() {
 		var img = document.getElementById('mapimg');
+		img.onerror = null;
+		img.onload = function() {
+			this.className = 'loaded';
+			document.getElementById('bg').style.backgroundImage = "url('fallback_map.jpg')";
+		};
 		img.src = 'fallback_map.jpg';
-		img.classList.add('loaded');
-		document.getElementById('bg').style.backgroundImage = "url('fallback_map.jpg')";
 	}
 
 	function GameDetails(servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, lang, gamemodeNice) {
@@ -404,7 +386,7 @@
 			} catch(e) {}
 
 			document.getElementById('bg').style.backgroundImage = "url('" + mapImg + "')";
-			this.classList.add('loaded');
+			this.className = 'loaded';
 		};
 
 		img.onerror = function() { useFallback(); };
@@ -436,8 +418,8 @@
 
 		var fillEl = document.getElementById('bar-fill');
 		var pctEl  = document.getElementById('progress-pct');
-
 		var currentPct = parseInt(pctEl ? pctEl.textContent : '0') || 0;
+
 		if (pct > currentPct) {
 			if (fillEl) fillEl.style.width = pct + '%';
 			if (pctEl)  pctEl.textContent  = pct + '%';
@@ -453,8 +435,8 @@
 		var el = document.getElementById('status-text');
 		if (el) el.textContent = status;
 
-		if (status.toLowerCase().indexOf('workshop complete') !== -1 ||
-		    status.toLowerCase().indexOf('client info sent') !== -1) {
+		var lower = status.toLowerCase();
+		if (lower.indexOf('workshop complete') !== -1 || lower.indexOf('client info sent') !== -1) {
 			var fillEl = document.getElementById('bar-fill');
 			var pctEl  = document.getElementById('progress-pct');
 			if (fillEl) fillEl.style.width = '100%';
